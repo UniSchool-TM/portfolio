@@ -121,11 +121,18 @@ p:last-child{ margin-bottom:0; }
   border-bottom:1px solid var(--line);
 }
 .nav__mark{
+  display:flex; align-items:center; gap:10px;
+}
+.nav__mark span{
   font-family:var(--font-display);
   font-size:1.4rem;
   letter-spacing:0.04em;
   transform:skewX(-6deg);
   display:inline-block;
+}
+.nav__avatar{
+  width:30px; height:30px; border-radius:50%;
+  object-fit:cover; border:1px solid var(--line-strong);
 }
 .nav__links{ display:flex; gap:36px; }
 .nav__links a{
