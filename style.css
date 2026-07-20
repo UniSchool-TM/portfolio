@@ -315,6 +315,8 @@ p:last-child{ margin-bottom:0; }
   background:var(--accent); color:var(--bg);
   overflow:hidden; white-space:nowrap;
   border-top:1px solid var(--bg); border-bottom:1px solid var(--bg);
+  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
 .marquee__track{
   display:inline-flex; animation:marquee 22s linear infinite;
