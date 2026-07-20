@@ -40,43 +40,53 @@ function pushLog() {
 const logTimer = setInterval(pushLog, 180);
 pushLog();
 
-/* liquid: level tracks pct, wave slides sideways, bubbles rise */
+/* liquid: level tracks pct, waves slide sideways, bubbles rise */
+const loaderWaveBack = document.getElementById('loaderWaveBack');
+const loaderSurface = document.getElementById('loaderSurface');
 const SVG_H = 180;
 const TOP = 34;          // liquid level when 100% (a little above the letter top)
 const BOTTOM = 176;      // liquid level when 0% (below the baseline)
-const AMP = 6;           // wave amplitude
+const AMP = 6;           // front wave amplitude
+const AMP_BACK = 8;      // back wave amplitude (slightly bigger, for depth)
 let waveShift = 0;
 const bubbles = [];
 
 function makeBubble() {
   const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-  const r = 1.4 + Math.random() * 2.2;
+  const r = 1.1 + Math.random() * 2.4;
   c.setAttribute('r', r.toFixed(1));
-  c.setAttribute('cx', (30 + Math.random() * 260).toFixed(0));
-  const y = SVG_H + Math.random() * 20;
+  c.setAttribute('cx', (26 + Math.random() * 268).toFixed(0));
+  const y = SVG_H + Math.random() * 40;
   c.setAttribute('cy', y.toFixed(0));
   loaderBubbles.appendChild(c);
-  bubbles.push({ el: c, y, speed: 0.5 + Math.random() * 1.1, r });
+  bubbles.push({ el: c, y, speed: 0.35 + Math.random() * 1.25, r, base: 0.35 + Math.random() * 0.45 });
 }
-for (let i = 0; i < 7; i++) makeBubble();
+for (let i = 0; i < 16; i++) makeBubble();
 
 function levelY() {
   return BOTTOM - (BOTTOM - TOP) * (pct / 100);
 }
 
+function wavePath(y, amp, shift, close) {
+  const x0 = -160 + shift;
+  let d = 'M' + x0 + ' ' + y +
+    ' q 40 ' + (-amp) + ' 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0';
+  if (close) d += ' V ' + SVG_H + ' H ' + x0 + ' Z';
+  return d;
+}
+
 function renderLiquid() {
   const y = levelY();
-  waveShift = (waveShift + 1.4) % 160;
-  const x0 = -160 + waveShift;
-  const d = 'M' + x0 + ' ' + y +
-    ' q 40 ' + (-AMP) + ' 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0' +
-    ' V ' + SVG_H + ' H ' + x0 + ' Z';
-  loaderWave.setAttribute('d', d);
+  waveShift = (waveShift + 1.15) % 160;
+  const backShift = (waveShift + 80) % 160;
+  loaderWave.setAttribute('d', wavePath(y, AMP, waveShift, true));
+  loaderWaveBack.setAttribute('d', wavePath(y + 3, AMP_BACK, backShift, true));
+  loaderSurface.setAttribute('d', wavePath(y, AMP, waveShift, false));
   bubbles.forEach(b => {
     b.y -= b.speed;
-    if (b.y < y - 4) { b.y = SVG_H + Math.random() * 16; b.el.setAttribute('cx', (30 + Math.random() * 260).toFixed(0)); }
+    if (b.y < y - 4) { b.y = SVG_H + Math.random() * 30; b.el.setAttribute('cx', (26 + Math.random() * 268).toFixed(0)); }
     b.el.setAttribute('cy', b.y.toFixed(1));
-    b.el.setAttribute('opacity', b.y > y ? '0.55' : '0');
+    b.el.setAttribute('opacity', b.y > y ? b.base.toFixed(2) : '0');
   });
   liquidRAF = requestAnimationFrame(renderLiquid);
 }

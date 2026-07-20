@@ -120,14 +120,16 @@ p:last-child{ margin-bottom:0; }
   font-family:var(--font-display); font-size:150px; font-weight:400;
   letter-spacing:0.02em; transform:skewX(-6deg); transform-origin:center;
 }
-.loader__tm-empty{ fill:rgba(167,193,104,0.10); }
-#loaderLiquid path{ fill:var(--accent); }
+.loader__tm-empty{ fill:rgba(167,193,104,0.08); }
+.loader__wave-back{ fill:rgba(167,193,104,0.32); }
+.loader__wave-body{ fill:rgba(167,193,104,0.62); }
+.loader__wave-surface{ stroke:rgba(210,228,168,0.85); stroke-width:1.5px; }
 .loader__tm-outline{
   font-family:var(--font-display); font-size:150px; font-weight:400;
   letter-spacing:0.02em; transform:skewX(-6deg); transform-origin:center;
   fill:none; stroke:var(--accent); stroke-width:1.4px; opacity:0.85;
 }
-#loaderBubbles circle{ fill:var(--accent); opacity:0.55; }
+#loaderBubbles circle{ fill:rgba(210,228,168,0.7); }
 
 /* ==========================================================
    TYPE SYSTEM
