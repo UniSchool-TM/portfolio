@@ -29,6 +29,7 @@ html{ scroll-behavior:smooth; }
   *,*::before,*::after{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
 }
 
+html{ overflow-x:hidden; }
 body{
   margin:0;
   background:var(--bg);
@@ -38,6 +39,7 @@ body{
   line-height:1.7;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+  max-width:100%;
 }
 body.is-loading{ overflow:hidden; height:100vh; }
 body.menu-open{ overflow:hidden; height:100vh; }
@@ -176,11 +178,14 @@ p:last-child{ margin-bottom:0; }
   background:var(--bg-panel);
   clip-path:circle(0% at calc(100% - 46px) 46px);
   transition:clip-path .7s var(--ease-soft);
-  display:flex; align-items:center;
+  display:flex; align-items:flex-start;
+  overflow-y:auto;
 }
 .menu.is-open{ clip-path:circle(150% at calc(100% - 46px) 46px); }
 .menu__inner{
-  width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter);
+  width:100%; max-width:var(--container); margin:0 auto;
+  /* top padding clears the fixed nav so "01 TOP" never sits under the TM logo */
+  padding:120px var(--gutter) 60px;
   display:flex; flex-direction:column; gap:64px;
 }
 .menu__list{
@@ -421,4 +426,26 @@ p:last-child{ margin-bottom:0; }
   .section{ padding:90px 0; }
   .menu__list a{ font-size:2.2rem; }
   .hero__scroll{ display:none; }
+}
+
+/* --- small phones (iPhone SE / mini, ~320px): keep everything inside the screen --- */
+@media (max-width:380px){
+  /* menu items: shrink type & gap so long words like ACHIEVEMENTS fit */
+  .menu__inner{ gap:40px; }
+  .menu__list a{
+    font-size:clamp(1.5rem, 8vw, 2.05rem); gap:14px;
+    transform:skewX(-4deg); white-space:nowrap;
+  }
+  .menu__list a::before{ font-size:0.75rem; }
+  /* footer contact links inside menu: allow wrap, don't run off the right edge */
+  .menu__foot{ gap:14px 24px; }
+  .menu__foot a{ font-size:0.78rem; word-break:break-all; }
+  /* footer row: stack the two items vertically so the email doesn't clip */
+  .footer__row{ flex-direction:column; align-items:flex-start; gap:10px; }
+  /* nav: pull MENU/CLOSE + icon in so neither the bars nor the rotated ✕ kiss the edge */
+  .nav{ padding-left:16px; padding-right:16px; }
+  .nav__toggle{ gap:9px; }
+  .nav__toggle-text{ font-size:0.68rem; letter-spacing:0.1em; }
+  /* the ✕ is a 22px box whose rotated corners spill ~4px past the box; reserve that room */
+  .nav__toggle-box{ margin-right:4px; }
 }
