@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TM | Video Editor & Content Creator</title>
+<meta name="description" content="TM — 高校1年生の映像編集者・コンテンツクリエイター。UniSchoolでの活動、YouTube・Instagram案件、Premiere Pro / Photoshop / Canvaを使った映像制作の実績。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="https://github.com/user-attachments/assets/2cc68545-7c95-4cb7-8a0f-e8b49b412ac0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
+
+<!-- PRELOADER -->
+<div class="loader" id="loader">
+  <div class="loader__top">
+    <span>TM / PORTFOLIO</span>
+    <span id="loaderPct">00%</span>
+  </div>
+  <div class="loader__log" id="loaderLog"></div>
+  <div class="loader__bar"><span id="loaderBar"></span></div>
+</div>
+
+<!-- FULLSCREEN NAV OVERLAY -->
+<div class="menu" id="menu">
+  <div class="menu__inner">
+    <ol class="menu__list">
+      <li><a href="#top" data-n="01">TOP</a></li>
+      <li><a href="#about" data-n="02">ABOUT</a></li>
+      <li><a href="#works" data-n="03">WORKS</a></li>
+      <li><a href="#achievements" data-n="04">ACHIEVEMENTS</a></li>
+      <li><a href="#unischool" data-n="05">UNISCHOOL</a></li>
+      <li><a href="#skills" data-n="06">SKILLS</a></li>
+      <li><a href="#contact" data-n="07">CONTACT</a></li>
+    </ol>
+    <div class="menu__foot">
+      <a href="https://unischool.jp/" target="_blank" rel="noopener">unischool.jp</a>
+      <a href="mailto:contact@example.com">contact@example.com</a>
+    </div>
+  </div>
+</div>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="nav__mark">
+    <img src="https://github.com/user-attachments/assets/2cc68545-7c95-4cb7-8a0f-e8b49b412ac0" alt="TM" class="nav__avatar">
+    <span>TM</span>
+  </a>
+  <button class="nav__toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
+    <span class="nav__toggle-text">MENU</span>
+    <span class="nav__toggle-box"><span></span><span></span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero__media">
+    <img src="https://github.com/user-attachments/assets/00bce4aa-332a-4bfd-881b-782e436903db" alt="TM" loading="eager">
+    <div class="hero__scrim"></div>
+  </div>
+
+  <div class="hero__giant" aria-hidden="true">
+    <span data-speed="0.4">TM</span>
+  </div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow reveal">// VIDEO EDITOR — CONTENT CREATOR</p>
+    <p class="hero__tagline reveal">高校1年生。映像編集とSNSで、伝えたいことをかたちにする。</p>
+  </div>
+
+  <a href="#about" class="hero__scroll" aria-label="下へスクロール">
+    <span>SCROLL</span>
+    <span class="hero__scroll-line"></span>
+  </a>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>VIDEO EDITOR ✦ CONTENT CREATOR ✦ UNISCHOOL ✦ PREMIERE PRO ✦ PHOTOSHOP ✦ CANVA PRO ✦ </span>
+    <span>VIDEO EDITOR ✦ CONTENT CREATOR ✦ UNISCHOOL ✦ PREMIERE PRO ✦ PHOTOSHOP ✦ CANVA PRO ✦ </span>
+  </div>
+</div>
+
+<main>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section__inner">
+      <p class="label reveal">&gt;_About</p>
+      <h2 class="giant reveal">STORY</h2>
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p>
+            始まりは、中学生のときに書いていた恐竜好きが高じたブログだった。WordPressで一から組み立て、書くこと・伝えることの土台をつくった。
+          </p>
+          <p>
+            そこからSNSでの発信に領域を広げ、次第に映像へ。今では動画編集を軸に、企画から撮影・編集までを一人でこなすクリエイターとして活動している。
+          </p>
+          <p>
+            「学生だからできない」ではなく「学生だからこそできる」を体現するように、学校の枠を超えたプロジェクトにも携わっている。
+          </p>
+        </div>
+        <div class="about__timeline reveal">
+          <div class="tl__item">
+            <span class="tl__label">JHS</span>
+            <span class="tl__text">恐竜ブログを開設（WordPress）</span>
+          </div>
+          <div class="tl__item">
+            <span class="tl__label">JHS</span>
+            <span class="tl__text">SNS運用をスタート</span>
+          </div>
+          <div class="tl__item">
+            <span class="tl__label">JHS〜</span>
+            <span class="tl__text">YouTube・映像編集を開始</span>
+          </div>
+          <div class="tl__item">
+            <span class="tl__label">NOW</span>
+            <span class="tl__text">高校1年生。UniSchoolで活動中</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="section section--panel" id="works">
+    <div class="section__inner">
+      <p class="label reveal">&gt;_Works</p>
+      <h2 class="giant reveal">SELECTED</h2>
+      <p class="section__lead reveal">UniSchoolとしての活動の中から、一部の制作事例を紹介します。</p>
+
+      <div class="works__grid">
+        <div class="work reveal">
+          <span class="work__idx">01 / 02</span>
+          <div class="work__frame">
+            <iframe src="https://drive.google.com/file/d/1-hn-zpipT22EiQerrVAoKYcjxIhFXLDr/preview"
+              allow="autoplay" allowfullscreen loading="lazy" title="UniSchool制作事例 1"></iframe>
+          </div>
+          <div class="work__caption">
+            <p class="work__title">UniSchool 制作事例</p>
+            <p class="work__desc">学生団体UniSchoolとしての映像制作</p>
+          </div>
+        </div>
+
+        <div class="work reveal">
+          <span class="work__idx">02 / 02</span>
+          <div class="work__frame">
+            <iframe src="https://drive.google.com/file/d/1WEqRhWWuVuo0kkREHJghIK1gYP-6Tq2o/preview"
+              allow="autoplay" allowfullscreen loading="lazy" title="UniSchool制作事例 2"></iframe>
+          </div>
+          <div class="work__caption">
+            <p class="work__title">UniSchool 制作事例</p>
+            <p class="work__desc">学生団体UniSchoolとしての映像制作</p>
+          </div>
+        </div>
+      </div>
+      <p class="works__note reveal">※ 大規模な作品は制作が完了次第、随時追加予定です。</p>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="section" id="achievements">
+    <div class="section__inner">
+      <p class="label reveal">&gt;_Achievements</p>
+      <h2 class="giant reveal">TRACK RECORD</h2>
+
+      <div class="stats reveal">
+        <div class="stat">
+          <span class="stat__num"><span class="count" data-count="1500">0</span><small>人</small></span>
+          <span class="stat__label">YouTube 登録者数</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num"><span class="count" data-count="50">0</span><small>万回+</small></span>
+          <span class="stat__label">最高動画再生数</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num stat__num--text">収益化<small>達成</small></span>
+          <span class="stat__label">YouTubeパートナープログラム</span>
+        </div>
+      </div>
+
+      <div class="achieve__list">
+        <div class="achieve reveal">
+          <span class="achieve__no">01</span>
+          <div>
+            <h3>YouTube チャンネル運営</h3>
+            <p>企画・撮影・編集を一貫して担当。登録者数約1,500人、単一動画で最大約50万回再生を記録し、収益化を達成。</p>
+          </div>
+        </div>
+        <div class="achieve reveal">
+          <span class="achieve__no">02</span>
+          <div>
+            <h3>Instagram 案件対応</h3>
+            <p>企業からの制作案件を複数受注。アカウント運用ではなく、コンテンツ制作を担当。</p>
+          </div>
+        </div>
+        <div class="achieve reveal">
+          <span class="achieve__no">03</span>
+          <div>
+            <h3>劇場CM「名探偵コナン」上映</h3>
+            <p>三田学園のPR映像制作に携わり、劇場版名探偵コナンの上映前CMとして全国の映画館で放映された。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNISCHOOL -->
+  <section class="section section--panel" id="unischool">
+    <div class="section__inner section__inner--split">
+      <div class="unischool__text reveal">
+        <p class="label">&gt;_Organization</p>
+        <h2 class="giant">UNISCHOOL</h2>
+        <p class="unischool__role">// リーダー / 動画編集担当</p>
+        <p class="unischool__desc">
+          中・高校生が立ち上げた、学生の学びと学校を支える事業グループ。学生向けの勉強サポートツールの開発をはじめ、学校・教育機関向けの広報動画やPR映像の制作など、教育をさまざまな形で支援している。「学生だからできない」ではなく「学生だからこそできる」発想と行動力で、新しい価値を生み出すことを目指す。教育とクリエイティブを通して、すべての学生が挑戦しやすい未来へ。
+        </p>
+        <a href="https://unischool.jp/" target="_blank" rel="noopener" class="btn">
+          unischool.jp を見る
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="unischool__mark reveal" aria-hidden="true">UNI/SCHOOL</div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="section__inner">
+      <p class="label reveal">&gt;_Skills</p>
+      <h2 class="giant reveal">TOOLS</h2>
+      <div class="skills__grid">
+        <div class="skill reveal">
+          <span class="skill__no">01</span>
+          <span class="skill__name">Premiere<br>Pro</span>
+          <span class="skill__desc">動画編集・カット・カラー・書き出しまで一貫して対応</span>
+        </div>
+        <div class="skill reveal">
+          <span class="skill__no">02</span>
+          <span class="skill__name">Photoshop</span>
+          <span class="skill__desc">サムネイル・画像編集</span>
+        </div>
+        <div class="skill reveal">
+          <span class="skill__no">03</span>
+          <span class="skill__name">Canva<br>Pro</span>
+          <span class="skill__desc">SNS投稿・簡易デザイン制作</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section--contact" id="contact">
+    <div class="section__inner">
+      <p class="label reveal">&gt;_Contact</p>
+      <h2 class="giant reveal">LET'S TALK</h2>
+      <p class="section__lead reveal">映像制作・SNS案件のご相談はこちらから。</p>
+      <a href="mailto:contact@example.com" class="btn btn--lg reveal">
+        contact@example.com
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__giant" aria-hidden="true">TM</div>
+  <div class="footer__row">
+    <a href="https://unischool.jp/" target="_blank" rel="noopener">UniSchool</a>
+    <p>&copy; 2026 TM. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
