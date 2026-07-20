@@ -55,10 +55,18 @@ const pctTimer = setInterval(() => {
 }, 140);
 
 /* ---------------------------------------------------------
-   NAV SCROLL STATE
+   NAV SCROLL STATE + SCROLL PROGRESS BAR
 --------------------------------------------------------- */
 const nav = document.getElementById('nav');
-const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 40);
+const scrollProgress = document.getElementById('scrollProgress');
+const onScroll = () => {
+  nav.classList.toggle('is-scrolled', window.scrollY > 40);
+  if (scrollProgress) {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    scrollProgress.style.width = pct + '%';
+  }
+};
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
