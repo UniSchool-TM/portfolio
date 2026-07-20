@@ -23,6 +23,25 @@
     <span>TM / PORTFOLIO</span>
     <span id="loaderPct">00%</span>
   </div>
+
+  <div class="loader__mark">
+    <svg class="loader__logo" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs>
+        <clipPath id="tmClip">
+          <text x="160" y="140" text-anchor="middle" class="loader__tm-text">TM</text>
+        </clipPath>
+      </defs>
+      <g clip-path="url(#tmClip)">
+        <rect x="0" y="0" width="320" height="180" class="loader__tm-empty"></rect>
+        <g id="loaderLiquid">
+          <path id="loaderWave" d="M-320 180 Q -240 172 -160 180 T 0 180 T 160 180 T 320 180 T 480 180 T 640 180 V 180 H -320 Z"></path>
+        </g>
+        <g id="loaderBubbles"></g>
+      </g>
+      <text x="160" y="140" text-anchor="middle" class="loader__tm-outline">TM</text>
+    </svg>
+  </div>
+
   <div class="loader__log" id="loaderLog"></div>
   <div class="loader__bar"><span id="loaderBar"></span></div>
 </div>

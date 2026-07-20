@@ -22,6 +22,8 @@ const loader = document.getElementById('loader');
 const loaderPct = document.getElementById('loaderPct');
 const loaderBar = document.getElementById('loaderBar');
 const loaderLog = document.getElementById('loaderLog');
+const loaderWave = document.getElementById('loaderWave');
+const loaderBubbles = document.getElementById('loaderBubbles');
 
 let pct = 0;
 let logIndex = 0;
@@ -38,6 +40,48 @@ function pushLog() {
 const logTimer = setInterval(pushLog, 180);
 pushLog();
 
+/* liquid: level tracks pct, wave slides sideways, bubbles rise */
+const SVG_H = 180;
+const TOP = 34;          // liquid level when 100% (a little above the letter top)
+const BOTTOM = 176;      // liquid level when 0% (below the baseline)
+const AMP = 6;           // wave amplitude
+let waveShift = 0;
+const bubbles = [];
+
+function makeBubble() {
+  const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  const r = 1.4 + Math.random() * 2.2;
+  c.setAttribute('r', r.toFixed(1));
+  c.setAttribute('cx', (30 + Math.random() * 260).toFixed(0));
+  const y = SVG_H + Math.random() * 20;
+  c.setAttribute('cy', y.toFixed(0));
+  loaderBubbles.appendChild(c);
+  bubbles.push({ el: c, y, speed: 0.5 + Math.random() * 1.1, r });
+}
+for (let i = 0; i < 7; i++) makeBubble();
+
+function levelY() {
+  return BOTTOM - (BOTTOM - TOP) * (pct / 100);
+}
+
+function renderLiquid() {
+  const y = levelY();
+  waveShift = (waveShift + 1.4) % 160;
+  const x0 = -160 + waveShift;
+  const d = 'M' + x0 + ' ' + y +
+    ' q 40 ' + (-AMP) + ' 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0' +
+    ' V ' + SVG_H + ' H ' + x0 + ' Z';
+  loaderWave.setAttribute('d', d);
+  bubbles.forEach(b => {
+    b.y -= b.speed;
+    if (b.y < y - 4) { b.y = SVG_H + Math.random() * 16; b.el.setAttribute('cx', (30 + Math.random() * 260).toFixed(0)); }
+    b.el.setAttribute('cy', b.y.toFixed(1));
+    b.el.setAttribute('opacity', b.y > y ? '0.55' : '0');
+  });
+  liquidRAF = requestAnimationFrame(renderLiquid);
+}
+let liquidRAF = requestAnimationFrame(renderLiquid);
+
 const pctTimer = setInterval(() => {
   const step = pct < 70 ? Math.random() * 9 + 3 : Math.random() * 4 + 1;
   pct = Math.min(100, pct + step);
@@ -48,9 +92,10 @@ const pctTimer = setInterval(() => {
     clearInterval(pctTimer);
     clearInterval(logTimer);
     setTimeout(() => {
+      cancelAnimationFrame(liquidRAF);
       loader.classList.add('is-done');
       document.body.classList.remove('is-loading');
-    }, 250);
+    }, 450);
   }
 }, 140);
 

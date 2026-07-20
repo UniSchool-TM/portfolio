@@ -108,6 +108,27 @@ p:last-child{ margin-bottom:0; }
   background:var(--accent); transition:width .2s linear;
 }
 
+/* centered TM logo filling with green liquid */
+.loader__mark{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  pointer-events:none;
+}
+.loader__logo{
+  width:min(46vw, 340px); height:auto; overflow:visible;
+}
+.loader__tm-text{
+  font-family:var(--font-display); font-size:150px; font-weight:400;
+  letter-spacing:0.02em; transform:skewX(-6deg); transform-origin:center;
+}
+.loader__tm-empty{ fill:rgba(167,193,104,0.10); }
+#loaderLiquid path{ fill:var(--accent); }
+.loader__tm-outline{
+  font-family:var(--font-display); font-size:150px; font-weight:400;
+  letter-spacing:0.02em; transform:skewX(-6deg); transform-origin:center;
+  fill:none; stroke:var(--accent); stroke-width:1.4px; opacity:0.85;
+}
+#loaderBubbles circle{ fill:var(--accent); opacity:0.55; }
+
 /* ==========================================================
    TYPE SYSTEM
    ========================================================== */
