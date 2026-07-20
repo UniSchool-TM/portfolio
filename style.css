@@ -319,7 +319,7 @@ p:last-child{ margin-bottom:0; }
   mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
 .marquee__track{
-  display:inline-flex; animation:marquee 22s linear infinite;
+  display:inline-flex; animation:marquee 31s linear infinite;
 }
 .marquee__track span{
   font-family:var(--font-display); font-size:clamp(1.2rem,2.4vw,1.8rem);
