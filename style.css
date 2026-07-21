@@ -360,14 +360,31 @@ p:last-child{ margin-bottom:0; }
 .gallery__item--wide{ grid-column:1 / -1; aspect-ratio:16/7; }
 .gallery__item img{
   width:100%; height:100%; object-fit:cover; display:block;
-  filter:grayscale(0.15) contrast(1.02);
-  transition:transform .7s var(--ease), filter .5s;
+  /* TOP（ヘッダー）と同じトーン処理＋少し薄める */
+  filter:saturate(0.8) contrast(1.05) brightness(0.82);
+  opacity:0.9;
+  transform:scale(1.03);
+  transition:transform .7s var(--ease), opacity .5s, filter .5s;
 }
-.gallery__item:hover img{ transform:scale(1.05); filter:grayscale(0) contrast(1.05); }
+.gallery__item:hover img{ transform:scale(1.07); opacity:1; }
+/* TOPのscrimと同じ下からの暗がり（少し強め＝写真を落ち着かせる） */
 .gallery__item::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(20,23,26,0.25), transparent 45%);
-  pointer-events:none;
+  background:linear-gradient(180deg, rgba(20,23,26,0.2) 0%, rgba(20,23,26,0.45) 65%, rgba(20,23,26,0.82) 100%);
+  pointer-events:none; z-index:1;
+}
+/* ヘッダーの巨大文字の要素を、上段のワイド写真にだけ控えめに取り入れる */
+.gallery__item--wide{ display:flex; align-items:center; justify-content:center; }
+.gallery__item--wide::before{
+  content:"BEHIND THE LENS";
+  position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem, 8vw, 6rem); line-height:1;
+  color:var(--ink); opacity:0.07;
+  letter-spacing:0.06em; white-space:nowrap;
+  pointer-events:none; z-index:2;
+  mix-blend-mode:overlay;
 }
 
 /* WORKS */
