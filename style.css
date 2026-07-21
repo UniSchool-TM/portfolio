@@ -337,28 +337,28 @@ p:last-child{ margin-bottom:0; }
 
 /* TOP（ヒーロー）と同じく、写真を背景に敷くセクション */
 .section--photo{ overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-.section__bg{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+/* 背景は上下に余分を持たせて、パララックスで動いても常にセクションを覆う（隙間＝はみ出し防止） */
+.section__bg{
+  position:absolute; left:0; right:0; top:-80px; bottom:-80px;
+  z-index:0; pointer-events:none; overflow:hidden;
+}
 .section__bg img{
   width:100%; height:100%; object-fit:cover; object-position:center 30%;
   /* ヒーローと同じトーン処理 */
   filter:saturate(0.85) contrast(1.05) brightness(0.9);
-  /* Ken Burns：写真がゆっくり動いて“生きている”感じに（表示中のみ） */
-  transform:scale(1.06);
+  /* Ken Burns：ごく控えめに拡大のみ（大きく動かすと縁が出るため、移動は最小限） */
+  transform:scale(1.05);
   will-change:transform;
 }
 .section--photo.is-visible .section__bg img{
-  animation:kenburns 22s ease-in-out infinite alternate;
+  animation:kenburns 24s ease-in-out infinite alternate;
 }
 @keyframes kenburns{
-  0%   { transform:scale(1.06) translate(0, 0); }
-  100% { transform:scale(1.14) translate(-1.5%, -1.2%); }
+  0%   { transform:scale(1.05); }
+  100% { transform:scale(1.12); }
 }
-/* セクションごとに動きの向きを少し変えて単調さを消す */
-#works .section__bg img,
-#contact .section__bg img{ transform-origin:right center; }
-#achievements .section__bg img{ transform-origin:center bottom; }
 @media (prefers-reduced-motion:reduce){
-  .section--photo.is-visible .section__bg img{ animation:none; }
+  .section--photo.is-visible .section__bg img{ animation:none; transform:scale(1.05); }
 }
 .section__scrim{
   position:absolute; inset:0;
