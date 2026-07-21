@@ -166,6 +166,17 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
 }
 
 /* ---------------------------------------------------------
+   STAGGER：グループ内の要素に順番の遅延を付けてから reveal 化
+--------------------------------------------------------- */
+document.querySelectorAll('.about__timeline, .achieve__list, .works__grid, .skills__grid, .stats').forEach(group => {
+  const items = group.querySelectorAll('.tl__item, .achieve, .work, .skill, .stat');
+  items.forEach((el, i) => {
+    el.style.setProperty('--reveal-delay', (i * 90) + 'ms');
+    el.classList.add('reveal', 'reveal-stagger');
+  });
+});
+
+/* ---------------------------------------------------------
    SCROLL REVEAL
 --------------------------------------------------------- */
 const revealEls = document.querySelectorAll('.reveal');
@@ -218,4 +229,45 @@ if (heroGiant) {
     const y = window.scrollY * 0.15;
     heroGiant.style.transform = `translateY(${y}px)`;
   }, { passive: true });
+}
+
+/* ---------------------------------------------------------
+   SECTION PHOTO: reveal-trigger (Ken Burns) + scroll parallax
+--------------------------------------------------------- */
+const photoSections = document.querySelectorAll('.section--photo');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (photoSections.length) {
+  /* Ken Burns は表示中だけ再生（is-visible が付いたら動く） */
+  if ('IntersectionObserver' in window) {
+    const photoIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      });
+    }, { threshold: 0.05 });
+    photoSections.forEach(s => photoIo.observe(s));
+  } else {
+    photoSections.forEach(s => s.classList.add('is-visible'));
+  }
+
+  /* 背景写真だけスクロールでゆっくりズレる＝奥行き（コンテンツより遅く動く） */
+  if (!reduceMotion) {
+    let ticking = false;
+    const parallax = () => {
+      const vh = window.innerHeight;
+      photoSections.forEach(s => {
+        const bg = s.querySelector('.section__bg');
+        if (!bg) return;
+        const rect = s.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > vh) { ticking = false; return; }
+        const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+        bg.style.transform = `translateY(${progress * 28}px)`;
+      });
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(parallax); ticking = true; }
+    }, { passive: true });
+    parallax();
+  }
 }
