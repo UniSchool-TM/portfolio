@@ -360,8 +360,9 @@ p:last-child{ margin-bottom:0; }
 @media (prefers-reduced-motion:reduce){
   .section--photo.is-visible .section__bg img{ animation:none; transform:scale(1.05); }
 }
+/* 暗がりは写真レイヤーとは独立させ、セクション全体を必ず覆う（写真がKen Burnsで拡大してもはみ出さない） */
 .section__scrim{
-  position:absolute; inset:0;
+  position:absolute; inset:0; z-index:1; pointer-events:none;
   /* 背景に敷いても文字が読めるよう、ヒーローより少し濃いめの暗がり */
   background:
     linear-gradient(180deg, rgba(20,23,26,0.86) 0%, rgba(20,23,26,0.8) 50%, rgba(20,23,26,0.9) 100%),
