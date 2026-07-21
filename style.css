@@ -448,19 +448,22 @@ p:last-child{ margin-bottom:0; }
   display:flex; flex-direction:column; justify-content:space-between; gap:14px;
   transition:background .3s;
 }
-/* 背景の大きなツール略称（PR.pngのような灰色ゴースト文字） */
+/* 背景の大きなツール略称（PR.pngのように右端でわざと切る） */
 .skill::before{
   content:attr(data-ghost);
-  position:absolute; right:-0.12em; bottom:-0.28em;
-  font-family:var(--font-display);
-  font-size:12rem; line-height:0.8; letter-spacing:-0.02em;
+  position:absolute; bottom:-0.22em;
+  /* 右端から一定量はみ出させて、2文字目を毎回同じ幅で切る */
+  right:-0.34em;
+  font-family:var(--font-display); font-weight:400;
+  font-size:11.5rem; line-height:0.8; letter-spacing:0.01em;
+  white-space:nowrap;
   color:var(--ink);
-  opacity:0.05;
+  opacity:0.06;
   pointer-events:none; z-index:0;
   transition:opacity .3s, transform .5s var(--ease);
   transform:translateZ(0);
 }
-.skill:hover::before{ opacity:0.09; transform:translate(-2px,-4px); }
+.skill:hover::before{ opacity:0.1; }
 .skill:hover{ background:var(--bg-panel); }
 .skill__no,.skill__name,.skill__desc{ position:relative; z-index:1; }
 .skill__no{ font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-faint); }
