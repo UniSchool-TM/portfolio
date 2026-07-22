@@ -55,10 +55,11 @@
       <li><a href="#top" data-n="01">TOP</a></li>
       <li><a href="#about" data-n="02">ABOUT</a></li>
       <li><a href="#works" data-n="03">WORKS</a></li>
-      <li><a href="#achievements" data-n="04">ACHIEVEMENTS</a></li>
-      <li><a href="#unischool" data-n="05">UNISCHOOL</a></li>
-      <li><a href="#skills" data-n="06">SKILLS</a></li>
-      <li><a href="#contact" data-n="07">CONTACT</a></li>
+      <li><a href="#posts" data-n="04">POSTS</a></li>
+      <li><a href="#achievements" data-n="05">ACHIEVEMENTS</a></li>
+      <li><a href="#unischool" data-n="06">UNISCHOOL</a></li>
+      <li><a href="#skills" data-n="07">SKILLS</a></li>
+      <li><a href="#contact" data-n="08">CONTACT</a></li>
     </ol>
     <div class="menu__foot">
       <a href="https://unischool.jp/" target="_blank" rel="noopener">unischool.jp</a>
@@ -190,6 +191,20 @@
         </div>
       </div>
       <p class="works__note reveal">※ 大規模な作品は制作が完了次第、随時追加予定です。</p>
+    </div>
+  </section>
+
+  <!-- POSTS (Instagram: unischool_tm) -->
+  <section class="section" id="posts">
+    <div class="section__inner">
+      <p class="label reveal">&gt;_Posts</p>
+      <h2 class="giant reveal">LATEST</h2>
+      <p class="section__lead reveal">Instagram <a href="https://www.instagram.com/unischool_tm/" target="_blank" rel="noopener" class="posts__handle">@unischool_tm</a> の最新の投稿。更新すると、しばらくして自動でここに反映されます。</p>
+
+      <div class="posts__grid" id="postsGrid" aria-live="polite">
+        <!-- posts.json から script.js が投稿カードを描画します -->
+      </div>
+      <p class="posts__note reveal" id="postsNote"></p>
     </div>
   </section>
 
