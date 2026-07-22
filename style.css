@@ -436,13 +436,14 @@ p:last-child{ margin-bottom:0; }
 .unischool__logo img{ width:100%; max-width:360px; height:auto; }
 
 .btn{
-  display:inline-flex; align-items:center; gap:10px;
+  display:inline-flex; align-items:center; justify-content:flex-start; gap:10px;
   font-family:var(--font-mono); font-size:0.85rem; letter-spacing:0.06em;
   color:var(--ink); border:1px solid var(--line-strong);
   padding:14px 22px; margin-top:28px; border-radius:2px;
+  white-space:nowrap;
   transition:border-color .25s, background .25s, transform .25s var(--ease);
 }
-.btn svg{ transition:transform .25s var(--ease); }
+.btn svg{ flex:none; transition:transform .25s var(--ease); }
 .btn:hover{ border-color:var(--accent); background:rgba(167,193,104,0.08); transform:translateY(-2px); }
 .btn:hover svg{ transform:translate(2px,-2px); }
 .btn--lg{ font-size:1rem; padding:20px 30px; }
@@ -477,13 +478,18 @@ p:last-child{ margin-bottom:0; }
 
 /* CONTACT */
 .section--contact .section__lead{ margin-bottom:36px; }
-.contact__actions{ display:flex; flex-wrap:wrap; gap:16px; }
-.contact__actions .btn{ margin-top:0; }
+/* 2つのボタンを同じ幅に揃えて端をきれいに合わせる（バラつき＝ズレ防止） */
+.contact__actions{ display:flex; flex-wrap:wrap; gap:16px; max-width:760px; }
+.contact__actions .btn{
+  margin-top:0;
+  flex:1 1 300px;      /* 均等に伸びて同じ幅になる。300px未満になったら折り返す */
+  min-width:0;         /* 中身が長くてもはみ出さない */
+}
 .btn__sub{ font-family:var(--font-mono); color:var(--ink-muted); letter-spacing:0.02em; }
 .btn:hover .btn__sub{ color:var(--ink); }
 @media (max-width:560px){
-  .contact__actions{ flex-direction:column; align-items:flex-start; }
-  .contact__actions .btn{ width:100%; }
+  .contact__actions{ flex-direction:column; align-items:stretch; max-width:none; }
+  .contact__actions .btn{ flex:none; width:100%; }
 }
 
 /* ==========================================================
