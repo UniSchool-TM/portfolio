@@ -477,6 +477,14 @@ p:last-child{ margin-bottom:0; }
 
 /* CONTACT */
 .section--contact .section__lead{ margin-bottom:36px; }
+.contact__actions{ display:flex; flex-wrap:wrap; gap:16px; }
+.contact__actions .btn{ margin-top:0; }
+.btn__sub{ font-family:var(--font-mono); color:var(--ink-muted); letter-spacing:0.02em; }
+.btn:hover .btn__sub{ color:var(--ink); }
+@media (max-width:560px){
+  .contact__actions{ flex-direction:column; align-items:flex-start; }
+  .contact__actions .btn{ width:100%; }
+}
 
 /* ==========================================================
    FOOTER
