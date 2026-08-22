@@ -60,7 +60,11 @@ ul, ol { list-style: none; }
   font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.6);
 }
-.intro__center { align-self: center; text-align: center; }
+.intro__center {
+  position: absolute; inset: 0;
+  display: grid; place-content: center;
+  text-align: center;
+}
 .intro__tc {
   font-family: var(--font-mono); font-weight: 500;
   font-size: clamp(2.4rem, 8vw, 5rem); letter-spacing: 0.06em;
@@ -71,7 +75,7 @@ ul, ol { list-style: none; }
   font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.08em;
   color: var(--accent);
 }
-.intro__bar { height: 2px; background: rgba(255, 255, 255, 0.14); }
+.intro__bar { height: 3px; background: rgba(255, 255, 255, 0.14); z-index: 1; }
 .intro__bar span {
   display: block; height: 100%; width: 0%;
   background: var(--accent);

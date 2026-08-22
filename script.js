@@ -19,6 +19,7 @@ const introTc = document.getElementById('introTc');
 const introLog = document.getElementById('introLog');
 
 (function runIntro() {
+  if (!introTc || !introBar || !introPct || !introLog) return;
   const FPS = 24, CLIP_SEC = 10;
   let pct = 0, logIndex = 0;
 
