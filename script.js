@@ -1,11 +1,60 @@
 /* ---------------------------------------------------------
-   INTRO：読み込み後にオーバーレイを退ける
+   INTRO LOADER：編集タイムライン風（TC カウント + レンダーバー）
 --------------------------------------------------------- */
-window.addEventListener('load', () => {
-  setTimeout(() => document.body.classList.add('is-ready'), 250);
-});
-// 念のためフォールバック（loadが遅い環境）
-setTimeout(() => document.body.classList.add('is-ready'), 2200);
+const BOOT_LOG = [
+  'Footage: Import Clips',
+  'Footage: Proxy Generate',
+  'Timeline: Sync Clips',
+  'Edit: Cut Point Analyze',
+  'Color: Apply LUT',
+  'Audio: Levels Normalize',
+  'Audio: BGM Sync',
+  'Export: Render Timeline',
+  'Export: Ready'
+];
+
+const introPct = document.getElementById('introPct');
+const introBar = document.getElementById('introBar');
+const introTc = document.getElementById('introTc');
+const introLog = document.getElementById('introLog');
+
+(function runIntro() {
+  const FPS = 24, CLIP_SEC = 10;
+  let pct = 0, logIndex = 0;
+
+  const fmtTc = (frames) => {
+    const ff = frames % FPS;
+    const ss = Math.floor(frames / FPS) % 60;
+    const mm = Math.floor(frames / (FPS * 60)) % 60;
+    const hh = Math.floor(frames / (FPS * 3600));
+    const p2 = (n) => String(n).padStart(2, '0');
+    return `${p2(hh)}:${p2(mm)}:${p2(ss)}:${p2(ff)}`;
+  };
+
+  const tick = setInterval(() => {
+    pct = Math.min(100, pct + Math.random() * 7 + 2);
+    const rounded = Math.round(pct);
+    introPct.textContent = rounded + '%';
+    introBar.style.width = pct + '%';
+    introTc.textContent = fmtTc(Math.round((pct / 100) * CLIP_SEC * FPS));
+    if (rounded >= 100) finish();
+  }, 60);
+
+  const logTimer = setInterval(() => {
+    if (logIndex >= BOOT_LOG.length) { clearInterval(logTimer); return; }
+    introLog.textContent = '> ' + BOOT_LOG[logIndex++];
+  }, 170);
+
+  function finish() {
+    clearInterval(tick);
+    clearInterval(logTimer);
+    introLog.textContent = '> Export: Ready';
+    setTimeout(() => document.body.classList.add('is-ready'), 350);
+  }
+})();
+
+// フォールバック（何らかの理由で止まった場合）
+setTimeout(() => document.body.classList.add('is-ready'), 4000);
 
 /* ---------------------------------------------------------
    HEADER SCROLL STATE
