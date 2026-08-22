@@ -298,6 +298,83 @@ body.menu-open .header {
 @keyframes ticker { to { transform: translateX(-50%); } }
 
 /* ---------------------------------------------------------
+   INTRO TIMELINE (NLE-style loader)
+--------------------------------------------------------- */
+.intro__tl {
+  position: relative;
+  width: min(560px, 82vw);
+  margin: 34px auto 0;
+  display: grid;
+  gap: 7px;
+}
+.tl-row { display: flex; align-items: stretch; gap: 12px; }
+.tl-label {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+  width: 22px; display: flex; align-items: center; justify-content: flex-end;
+}
+.tl-track {
+  flex: 1; height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 5px;
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px;
+  position: relative;
+}
+.clip {
+  display: block;
+  width: var(--w, 20%);
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.07) 5px,
+      rgba(255, 255, 255, 0.03) 5px,
+      rgba(255, 255, 255, 0.03) 10px
+  );
+  transform: scaleX(0);
+  opacity: 0;
+  transform-origin: left center;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s,
+              background 0.25s, border-color 0.25s;
+}
+.clip.is-in { transform: scaleX(1); opacity: 1; }
+.clip.is-rendered {
+  border-color: var(--accent);
+  background: linear-gradient(90deg, rgba(127, 214, 164, 0.55), rgba(127, 214, 164, 0.75));
+}
+.tl-playhead {
+  position: absolute;
+  top: -7px; bottom: -7px;
+  left: calc(34px + (100% - 34px) * 0);
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+  z-index: 2;
+  pointer-events: none;
+}
+.tl-playhead::before {
+  content: "";
+  position: absolute; top: -5px; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #fff;
+}
+.tl-cuts { position: absolute; inset: 0; pointer-events: none; }
+.cut-mark {
+  position: absolute;
+  top: 2px; bottom: 2px;
+  width: 2px;
+  background: #ff5d5d;
+  box-shadow: 0 0 8px rgba(255, 93, 93, 0.9);
+  animation: cutFlash 0.5s steps(2, jump-none) infinite;
+}
+@keyframes cutFlash { 50% { opacity: 0.25; } }
+
+/* ---------------------------------------------------------
    SECTION COMMON
 --------------------------------------------------------- */
 .section { padding: clamp(84px, 12vh, 130px) 0; }

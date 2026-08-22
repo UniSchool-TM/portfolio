@@ -3,13 +3,13 @@
 --------------------------------------------------------- */
 const BOOT_LOG = [
   'Footage: Import Clips',
-  'Footage: Proxy Generate',
-  'Timeline: Sync Clips',
-  'Edit: Cut Point Analyze',
+  'Footage: Sync Media',
+  'Timeline: Place Clips',
+  'Edit: Razor Tool — Cut',
   'Color: Apply LUT',
   'Audio: Levels Normalize',
-  'Audio: BGM Sync',
   'Export: Render Timeline',
+  'Export: Encode H.264',
   'Export: Ready'
 ];
 
@@ -17,6 +17,14 @@ const introPct = document.getElementById('introPct');
 const introBar = document.getElementById('introBar');
 const introTc = document.getElementById('introTc');
 const introLog = document.getElementById('introLog');
+
+/* タイムライン演出用 */
+const tlClips = Array.from(document.querySelectorAll('.intro__tl .clip'));
+const tlPlayhead = document.getElementById('tlPlayhead');
+const tlCuts = document.getElementById('tlCuts');
+const CUT_AT = [46, 58, 66];          // カットを入れる位置(%)
+const IMPORT_END = 38;                // ここまででクリップ取り込み
+const RENDER_START = 72;              // ここから書き出し(クリップが緑にレンダリング)
 
 (function runIntro() {
   if (!introTc || !introBar || !introPct || !introLog) return;
@@ -32,12 +40,38 @@ const introLog = document.getElementById('introLog');
     return `${p2(hh)}:${p2(mm)}:${p2(ss)}:${p2(ff)}`;
   };
 
+  let cutIndex = 0;
+
+  function stageTimeline() {
+    if (!tlPlayhead) return;
+    // 1) 取り込み: クリップが順に並ぶ
+    const imported = Math.floor((Math.min(pct, IMPORT_END) / IMPORT_END) * tlClips.length);
+    tlClips.forEach((el, i) => el.classList.toggle('is-in', i < imported));
+    // 2) プレイヘッド: 取り込み後、右へ走る
+    const pos = pct <= IMPORT_END ? 0 : (pct - IMPORT_END) / (100 - IMPORT_END);
+    tlPlayhead.style.left = `calc(34px + (100% - 34px) * ${pos.toFixed(4)})`;
+    // 3) カット: プレイヘッドが閾値を通過すると赤いカットマークが入る
+    while (cutIndex < CUT_AT.length && pct >= CUT_AT[cutIndex]) {
+      const mark = document.createElement('i');
+      mark.className = 'cut-mark';
+      mark.style.left = `calc(34px + (100% - 34px) * ${CUT_AT[cutIndex] / 100})`;
+      tlCuts.appendChild(mark);
+      cutIndex++;
+    }
+    // 4) 書き出し: 左から順にクリップが緑でレンダリングされる
+    if (pct >= RENDER_START) {
+      const done = ((pct - RENDER_START) / (100 - RENDER_START)) * tlClips.length;
+      tlClips.forEach((el, i) => el.classList.toggle('is-rendered', i < done));
+    }
+  }
+
   const tick = setInterval(() => {
     pct = Math.min(100, pct + Math.random() * 7 + 2);
     const rounded = Math.round(pct);
     introPct.textContent = rounded + '%';
     introBar.style.width = pct + '%';
     introTc.textContent = fmtTc(Math.round((pct / 100) * CLIP_SEC * FPS));
+    stageTimeline();
     if (rounded >= 100) finish();
   }, 60);
 
