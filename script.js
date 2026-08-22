@@ -279,3 +279,24 @@ if ('IntersectionObserver' in window) {
       if (note) note.textContent = '';
     });
 })();
+
+/* ---------------------------------------------------------
+   HERO TIMECODE：24fps で常時走る TC（ビューファインダー/タイムライン）
+--------------------------------------------------------- */
+(function heroTimecode() {
+  const els = [document.getElementById('vfTc'), document.getElementById('htTc')].filter(Boolean);
+  if (!els.length) return;
+  const FPS = 24;
+  const p2 = (n) => String(n).padStart(2, '0');
+  function loop(t) {
+    const frames = Math.floor((t / 1000) * FPS);
+    const ff = frames % FPS;
+    const ss = Math.floor(frames / FPS) % 60;
+    const mm = Math.floor(frames / (FPS * 60)) % 60;
+    const hh = Math.floor(frames / (FPS * 3600)) % 24;
+    const s = `${p2(hh)}:${p2(mm)}:${p2(ss)}:${p2(ff)}`;
+    els.forEach(el => { el.textContent = s; });
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
