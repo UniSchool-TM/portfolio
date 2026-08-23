@@ -27,7 +27,19 @@ const IMPORT_END = 38;                // ここまででクリップ取り込み
 const RENDER_START = 72;              // ここから書き出し(クリップが緑にレンダリング)
 
 (function runIntro() {
-  if (!introTc || !introBar || !introPct || !introLog) return;
+  // 同じタブで2回目以降の表示(戻る/進む含む)はローディングをスキップ
+  let skipped = false;
+  try {
+    skipped = sessionStorage.getItem('tm-intro') === '1';
+    sessionStorage.setItem('tm-intro', '1');
+  } catch (e) {}
+  const introEl = document.getElementById('intro');
+  if (!introTc || !introBar || !introPct || !introLog || !introEl) return;
+  if (skipped) {
+    introEl.classList.add('is-skip');
+    document.body.classList.add('is-ready');
+    return;
+  }
   const FPS = 24, CLIP_SEC = 10;
   let pct = 0, logIndex = 0;
 
@@ -90,6 +102,15 @@ const RENDER_START = 72;              // ここから書き出し(クリップ�
 
 // フォールバック（何らかの理由で止まった場合）
 setTimeout(() => document.body.classList.add('is-ready'), 4000);
+
+// 戻る/進むでキャッシュから復元された場合はローディングなしで即表示
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    const el = document.getElementById('intro');
+    if (el) el.classList.add('is-skip');
+    document.body.classList.add('is-ready');
+  }
+});
 
 /* ---------------------------------------------------------
    HEADER SCROLL STATE

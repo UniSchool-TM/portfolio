@@ -82,9 +82,9 @@ ul, ol { list-style: none; }
   display: block; height: 100%; width: 0%;
   background: var(--accent);
 }
-body.is-ready .intro {
-  transform: translateY(-100%);
-  visibility: hidden;
+body.is-ready .intro,
+.intro.is-skip {
+  display: none;
 }
 
 /* ---------------------------------------------------------
