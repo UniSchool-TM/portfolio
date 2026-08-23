@@ -325,7 +325,7 @@ body.menu-open .header {
   font-variant-numeric: tabular-nums;
 }
 .fchip--cut {
-  top: clamp(120px, 20vh, 200px); left: min(46%, 560px);
+  top: clamp(110px, 18vh, 180px); left: clamp(16px, 40vw, 500px);
   animation: floatY 9s ease-in-out infinite alternate;
 }
 .fchip--io {
@@ -335,7 +335,7 @@ body.menu-open .header {
 .fchip--io b:first-of-type { border-color: rgba(127, 214, 164, 0.65); color: rgba(46, 122, 82, 0.8); }
 .fclip {
   position: absolute;
-  top: clamp(140px, 24vh, 230px); right: min(44%, 520px);
+  top: clamp(280px, 44vh, 430px); left: clamp(10px, 33vw, 420px);
   display: inline-flex; align-items: center; gap: 6px;
   font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.08em;
   color: rgba(16, 18, 16, 0.32);
@@ -713,6 +713,20 @@ body.menu-open .header {
 /* ---------------------------------------------------------
    CONTACT
 --------------------------------------------------------- */
+.section--contact { position: relative; overflow: hidden; }
+.contact__ghost {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--font-en); font-weight: 700;
+  font-size: clamp(5rem, 16vw, 14rem);
+  line-height: 1; letter-spacing: -0.03em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(16, 18, 16, 0.13);
+  pointer-events: none;
+  z-index: 0;
+}
+.section--contact .container--narrow { position: relative; z-index: 1; }
 .contact__catch {
   font-family: var(--font-en); font-weight: 700;
   font-size: clamp(3rem, 9vw, 6rem); text-align: center;
