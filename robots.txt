@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://unischool-tm.github.io/portfolio/sitemap.xml
