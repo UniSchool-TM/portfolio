@@ -1025,3 +1025,19 @@ body.is-ready .hero__media { transition-delay: 0.3s; }
   .work__meta { flex-wrap: wrap; row-gap: 10px; }
   .work__more { margin-left: 0; width: 100%; justify-content: center; }
 }
+
+/* ---------------------------------------------------------
+   404
+--------------------------------------------------------- */
+.nf {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 18px; text-align: center; padding: 24px;
+}
+.nf__no { font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.1em; color: var(--accent); }
+.nf__title {
+  font-family: var(--font-en); font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 5rem); letter-spacing: -0.02em;
+}
+.nf__lead { color: var(--muted); max-width: 30em; }
+.nf .btn { margin-top: 10px; }
