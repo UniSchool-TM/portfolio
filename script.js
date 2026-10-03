@@ -293,7 +293,7 @@ if ('IntersectionObserver' in window) {
       const cards = view.map((p, i) => buildCard(p, i));
       cards.forEach(c => grid.appendChild(c));
       revealCards(cards);
-      if (note) note.textContent = '※ Instagram @unischool_tm の投稿を自動で表示しています（新しい順・最大6件）。';
+      if (note) note.textContent = '※ Instagram @unischool_tm の投稿を新しい順に表示しています（最大6件・画像はサイト内に保存）。';
     })
     .catch(() => {
       showEmpty('投稿を読み込めませんでした。Instagram @unischool_tm をご覧ください。');
