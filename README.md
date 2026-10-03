@@ -59,5 +59,6 @@ portfolio/
 ├── sitemap.xml     # 検索エンジンへのページ一覧
 ├── robots.txt      # クローラー設定
 ├── 404.html        # カスタム 404
+├── CNAME           # GitHub Pages のカスタムドメイン(tm.unischool.jp)
 └── README.md
 ```
