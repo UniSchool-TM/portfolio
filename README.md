@@ -40,7 +40,7 @@ tm.unischool.jp  →  Cloudflare(DNS + プロキシ)  →  unischool-tm.github.i
 ```
 
 - **配信元**: GitHub Pages(`main` ブランチの `/` をルートとしてビルド)。`main` へ push すると自動反映
-- **独自ドメイン**: Cloudflare 側で `tm.unischool.jp` の A レコードがプロキシ指向。GitHub Pages 側には `CNAME` を登録していない
+- **独自ドメイン**: `CNAME` に `tm.unischool.jp` を登録し、GitHub Pages にカスタムドメインとして認識させている。Cloudflare 側は A レコードをプロキシ指向しており、CNAME の登録前はカスタムドメインでの配信を GitHub Pages が拒否していた
 - **clean URL**: Cloudflare のリダイレクトルールにより `/work-01.html` → `/work-01` へ 308 転送される。サイト内のリンクと canonical は拡張子なしの `/work-01` を指している
 - **robots.txt**: Cloudflare のメール難読化（`__cf_email__`)が有効化されているため、`mailto:` は JS 無効時に読めない
 
